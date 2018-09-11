@@ -19,6 +19,7 @@ jobs:
       - run:
           name: Build image
           command: docker build -t ataber/mkl_vtk .
+          no_output_timeout: "30m"
 
       - deploy:
           name: Deploy image to Docker Hub
