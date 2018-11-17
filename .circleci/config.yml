@@ -25,4 +25,7 @@ jobs:
           name: Deploy image to Docker Hub
           command: |
             docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            docker push ataber/mkl_vtk
+            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
+            then docker push ataber/mkl_vtk; \
+            else docker tag ataber/mkl_vtk ataber/mkl_vtk:${CIRCLE_BRANCH} && \
+                 docker push ataber/mkl_vtk:${CIRCLE_BRANCH}; fi
